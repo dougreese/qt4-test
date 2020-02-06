@@ -18,6 +18,11 @@ SOURCES += \
         main.cpp
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+_YOCTO_BUILD = $$(YOCTO_BUILD)
+isEmpty(_YOCTO_BUILD) {
+    target.path = /usr/local/bin
+} else {
+    target.path = /home/testuser
+}
+
 !isEmpty(target.path): INSTALLS += target
